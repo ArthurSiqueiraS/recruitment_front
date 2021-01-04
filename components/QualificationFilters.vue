@@ -84,6 +84,13 @@ export default {
         value: l.id,
       }))
     },
+    remoteLocation() {
+      const remoteLocation = this.locationOptions.find(
+        (l) => l.city === 'Remote'
+      )
+
+      return remoteLocation ? remoteLocation.id : null
+    },
     locations() {
       if (this.remote || !this.selectedState) return null
 
@@ -123,7 +130,11 @@ export default {
       }))
     },
     filter() {
-      this.$emit('filter', { ...this.filters, locations: this.locations })
+      this.$emit('filter', {
+        ...this.filters,
+        locations: this.locations,
+        remote: this.remote && this.remoteLocation,
+      })
     },
     async updateBase() {
       this.updating = true

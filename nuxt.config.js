@@ -67,6 +67,7 @@ export default {
           primary: '#6E2B77',
           accent: '#E08F5D',
           secondary: '#41A9B9',
+          background: '#E2EFF1',
           info: colors.teal.lighten1,
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,
