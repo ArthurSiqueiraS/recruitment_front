@@ -25,8 +25,9 @@
                 <v-col cols="12" sm="6">
                   <div class="job-location">
                     {{
-                      job.location.city +
-                      (job.location.state ? ` - ${job.location.state}` : '')
+                      job.location
+                        ? `${job.location.city} - ${job.location.state}`
+                        : 'Remote'
                     }}
                   </div>
                   <div class="job-experience">
@@ -102,10 +103,6 @@ export default {
     async fetchJobs(params = {}) {
       this.loading = true
 
-      if (params.remote) {
-        params.locations = params.remote
-      }
-
       const response = await this.$axios.$get('/jobs', {
         params: { ...params, page: this.page },
       })
@@ -117,7 +114,7 @@ export default {
     },
     viewCandidates(job) {
       this.candidateParams = {
-        locations: job.location.id,
+        locations: (job.location || {}).id,
         experienceRange: [job.exp_min, job.exp_max],
         technologies: job.technologies.map((t) => t.id),
       }
