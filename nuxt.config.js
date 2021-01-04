@@ -54,6 +54,7 @@ export default {
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
     theme: {
+      options: { customProperties: true },
       themes: {
         light: {
           primary: '#6E2B77',

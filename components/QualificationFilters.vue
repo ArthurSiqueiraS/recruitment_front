@@ -26,7 +26,16 @@
       label="Tecnologias"
       clearable
     />
-    <v-range-slider v-model="filters.experienceRange" min="0" max="12" />
+    <div class="mt-4 grey--text">Tempo de experiência</div>
+    <v-range-slider
+      v-model="filters.experienceRange"
+      min="0"
+      max="12"
+      style="width: 100%"
+      class="mt-6"
+      thumb-size="25"
+      thumb-label="always"
+    />
     <v-btn color="accent" @click="filter">Filtrar</v-btn>
   </div>
 </template>
@@ -114,5 +123,6 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-start;
 }
 </style>
