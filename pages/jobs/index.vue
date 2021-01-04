@@ -1,0 +1,3 @@
+<template>
+  <CollectionContainer></CollectionContainer>
+</template>

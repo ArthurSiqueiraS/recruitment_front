@@ -1,9 +1,21 @@
 <template>
-  <div id="index" class="d-flex flex-column flex-sm-row">
-    <v-btn depressed tile color="primary" to="/candidates">
-      Quero buscar por candidatos para uma vaga
+  <div id="index" class="d-flex flex-column flex-md-row">
+    <v-btn
+      depressed
+      tile
+      color="primary"
+      to="/candidates"
+      :style="{ maxWidth: $vuetify.breakpoint.mdAndUp ? '50%' : '100%' }"
+    >
+      Quero buscar candidatos para uma vaga
     </v-btn>
-    <v-btn depressed tile color="secondary" to="/jobs">
+    <v-btn
+      depressed
+      tile
+      color="secondary"
+      to="/jobs"
+      :style="{ maxWidth: $vuetify.breakpoint.mdAndUp ? '50%' : '100%' }"
+    >
       Quero verificar as vagas abertas
     </v-btn>
   </div>

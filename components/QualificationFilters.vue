@@ -25,6 +25,7 @@
       chips
       label="Tecnologias"
       clearable
+      deletable-chips
     />
     <div class="mt-4 grey--text">Tempo de experiência</div>
     <v-range-slider
@@ -36,7 +37,19 @@
       thumb-size="25"
       thumb-label="always"
     />
-    <v-btn color="accent" @click="filter">Filtrar</v-btn>
+    <v-btn color="accent" @click="filter" depressed>Filtrar</v-btn>
+    <div class="mt-16 pt-md-16 d-flex flex-column">
+      <v-btn
+        @click="updateBase"
+        color="secondary"
+        small
+        :loading="updating"
+        depressed
+      >
+        Atualizar base
+      </v-btn>
+      <v-btn class="mt-4" text small color="grey" to="/">Voltar</v-btn>
+    </div>
   </div>
 </template>
 <script>
@@ -53,6 +66,7 @@ export default {
         experienceRange: [0, 12],
         technologies: [],
       },
+      updating: false,
     }
   },
   mounted() {
@@ -82,9 +96,7 @@ export default {
   },
   methods: {
     async fetchLocationOptions() {
-      const locations = await this.$axios.$get(
-        'http://localhost:3000/locations'
-      )
+      const locations = await this.$axios.$get('/locations')
 
       locations.sort((a, b) => {
         if (a.state === b.state) {
@@ -103,9 +115,7 @@ export default {
       this.locationOptions = locations
     },
     async fetchTechnologyOptions() {
-      const technologies = await this.$axios.$get(
-        'http://localhost:3000/technologies'
-      )
+      const technologies = await this.$axios.$get('/technologies')
 
       this.technologyOptions = technologies.map((t) => ({
         text: t.name,
@@ -114,6 +124,15 @@ export default {
     },
     filter() {
       this.$emit('filter', { ...this.filters, locations: this.locations })
+    },
+    async updateBase() {
+      this.updating = true
+      await this.$axios.post('/update_base')
+
+      this.fetchLocationOptions()
+      this.fetchTechnologyOptions()
+      this.filter()
+      this.updating = false
     },
   },
 }

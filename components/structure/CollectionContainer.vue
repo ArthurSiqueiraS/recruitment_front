@@ -2,7 +2,7 @@
   <div
     class="collection-page d-flex flex-column align-center flex-md-row align-md-start"
   >
-    <div class="filters">
+    <div class="filters d-flex flex-column align-center">
       <QualificationFilters
         @filter="
           (params) => {
@@ -14,7 +14,7 @@
     <v-divider
       :vertical="$vuetify.breakpoint.mdAndUp"
       style="width: 100%"
-      class="my-4"
+      class="my-4 my-md-0"
     />
     <div class="collection-container py-md-6 px-md-16">
       <slot />

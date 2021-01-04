@@ -41,8 +41,7 @@
 <script>
 export default {
   async asyncData({ $axios }) {
-    const candidates = await $axios.$get('http://localhost:3000/candidates')
-    console.log(candidates)
+    const candidates = await $axios.$get('/candidates')
     return { candidates }
   },
   data() {
@@ -50,12 +49,9 @@ export default {
   },
   methods: {
     async fetchCandidates(params) {
-      this.candidates = await this.$axios.$get(
-        'http://localhost:3000/candidates',
-        {
-          params,
-        }
-      )
+      this.candidates = await this.$axios.$get('/candidates', {
+        params,
+      })
 
       this.params = params
     },

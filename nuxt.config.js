@@ -1,5 +1,10 @@
 import colors from 'vuetify/es5/util/colors'
 
+const dev = process.env.NODE_ENV == 'development'
+const baseURL = dev
+  ? 'http://localhost:3000'
+  : 'https://recruitment-api-geekhunter.herokuapp.com'
+
 export default {
   // Disable server-side rendering (https://go.nuxtjs.dev/ssr-mode)
   ssr: false,
@@ -48,7 +53,9 @@ export default {
   ],
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
-  axios: {},
+  axios: {
+    baseURL,
+  },
 
   // Vuetify module configuration (https://go.nuxtjs.dev/config-vuetify)
   vuetify: {
